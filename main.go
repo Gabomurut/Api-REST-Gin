@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"strings"
 )
 
 // album represents data about a record album.
@@ -26,6 +27,7 @@ func main() {
 	router.GET("/albums", getAlbums)
 	router.POST("/albums", postAlbums)
 	router.GET("/albums/:id", getAlbumByID)
+	router.GET("/token/:token", getToken)
 
 	router.Run("localhost:8080")
 }
@@ -64,4 +66,22 @@ func getAlbumByID(c *gin.Context) {
         }
     }
     c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+}
+
+func getToken(c *gin.Context) {
+	var token string
+	var response string
+	token = c.Param("token")
+
+  if strings.Contains(token, "tecn") {
+
+	  response = "Tecnicatura"
+  }
+
+	if strings.Contains(token, "ing") {
+
+		response = "Ingenieria"
+	}
+
+	c.IndentedJSON(http.StatusOK, response)
 }
