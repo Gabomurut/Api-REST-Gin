@@ -29,7 +29,7 @@ func main() {
 	router.GET("/albums/:id", getAlbumByID)
 	router.GET("/token/:token", getToken)
 
-	router.Run("8080")
+	router.Run(":3000")
 }
 
 // getAlbums responds with the list of all albums as JSON.
